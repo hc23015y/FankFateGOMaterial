@@ -72,7 +72,7 @@ window.dataService = new ( function() {
 			
 			_materialData = tempMaterialData;
 			console.log(_materialData);
-		}
+		})
 	}
 	
 	_self.getMaterialData = function( mName ) {
