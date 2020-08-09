@@ -34,7 +34,9 @@ window.dataService = new ( function() {
 	
 	_self.combineServentData = function (skillData, ascensionData, cnNameData) {
 		let tempServentData = [];
-		
+		console.log (skillData);
+		console.log (ascensionData);
+		console.log (cnNameData);
 		$.each( skillData, function(index , servent) {
 			servent.svtCnName = cnNameData[ index ].name;
 			servent.rare = ascensionData["svt_" + servent.id].rare;
