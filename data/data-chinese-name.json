@@ -1,4 +1,4 @@
-var svtChineseData = [
+[
   {
     "name": "瑪琇・基利艾拉特"
   },
@@ -848,4 +848,4 @@ var svtChineseData = [
   {
     "name": "宇津見繪里世"
   }
-];
+]

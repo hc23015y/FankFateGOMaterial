@@ -1,4 +1,4 @@
-var itemData = [
+[
   {
     "name": "剣の輝石"
   },
@@ -200,4 +200,4 @@ var itemData = [
   {
     "name": "悠久の実"
   }
-];
+]
