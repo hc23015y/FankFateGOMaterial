@@ -45,7 +45,7 @@ window.dataService = new ( function() {
 		} )
 		
 		_serventData = tempServentData;
-		consol.log(_serventData);
+		console.log(_serventData);
 	}
 
 	
