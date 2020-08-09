@@ -12,7 +12,7 @@ window.dataService = new ( function() {
 		
 	} 
 	
-	_self.initServent = function () {
+	_self.initServentData = function () {
 		let skillData = [];
 		let ascensionData = [];
 		let cnNameData = [];
@@ -46,6 +46,11 @@ window.dataService = new ( function() {
 		
 		_serventData = tempServentData;
 		console.log(_serventData);
+	}
+	
+	_self.initMaterialData = function () {
+		
+		
 	}
 
 	
