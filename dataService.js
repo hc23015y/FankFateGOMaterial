@@ -34,14 +34,20 @@ window.dataService = new ( function() {
 	
 	_self.combineServentData = function (skillData, ascensionData, cnNameData) {
 		let tempServentData = [];
-		console.log (skillData);
-		console.log (ascensionData);
-		console.log (cnNameData);
+
 		$.each( skillData, function(index , servent) {
 			servent.svtCnName = cnNameData[ index ].name;
-			servent.rare = ascensionData["svt_" + servent.id].rare;
-			servent.cls = ascensionData["svt_" + servent.id].cls;
-			servent.ascension = ascensionData["svt_" + servent.id].ascension;
+			
+			if( ascensionData["svt_" + servent.id] != null ) {
+				servent.rare = ascensionData["svt_" + servent.id].rare;
+				servent.cls = ascensionData["svt_" + servent.id].cls;
+				servent.ascension = ascensionData["svt_" + servent.id].ascension;
+			}
+			else {
+				servent.rare = "B";
+				servent.cls = "None";
+				servent.ascension = [];			
+			}
 			
 			tempServentData[tempServentData.length] = servent;
 		} )
