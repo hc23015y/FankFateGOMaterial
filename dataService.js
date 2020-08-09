@@ -42,11 +42,13 @@ window.dataService = new ( function() {
 				servent.rare = ascensionData["svt_" + servent.id].rare;
 				servent.cls = ascensionData["svt_" + servent.id].cls;
 				servent.ascension = ascensionData["svt_" + servent.id].ascension;
+				servent.imgSrc = "images/svtNo_" + servent.id + ".png"; 
 			}
 			else {
 				servent.rare = "B";
 				servent.cls = "None";
-				servent.ascension = [];			
+				servent.ascension = [];
+				servent.imgSrc = "images/btn_close.png";				
 			}
 			
 			tempServentData[tempServentData.length] = servent;
@@ -57,8 +59,24 @@ window.dataService = new ( function() {
 	}
 	
 	_self.initMaterialData = function () {
-		
-		
+		$.getJSON( "data/data-item-img-id.json", function( data ) {
+			let tempMaterialData = {};
+			
+			$.each( data, function(key, value) {
+				let tempObj = {};
+				tempObj.id = value;
+				tempObj.imgSrc = "images/S_" + value + ".png";
+			
+				tempMaterialData[key] = tempObj;
+			})
+			
+			_materialData = tempMaterialData;
+			console.log(_materialData);
+		}
+	}
+	
+	_self.getMaterialData = function( mName ) {
+		return _materialData[mName]
 	}
 
 	
