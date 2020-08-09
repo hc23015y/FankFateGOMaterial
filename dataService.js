@@ -37,9 +37,9 @@ window.dataService = new ( function() {
 		
 		$.each( skillData, function(index , servent) {
 			servent.svtCnName = cnNameData[ index ].name;
-			servent.rare = ascensionData[servent.id].rare;
-			servent.cls = ascensionData[servent.id].cls;
-			servent.ascension = ascensionData[servent.id].ascension;
+			servent.rare = ascensionData["svt_" + servent.id].rare;
+			servent.cls = ascensionData["svt_" + servent.id].cls;
+			servent.ascension = ascensionData["svt_" + servent.id].ascension;
 			
 			tempServentData[tempServentData.length] = servent;
 		} )
