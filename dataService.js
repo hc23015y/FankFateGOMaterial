@@ -27,9 +27,9 @@ window.dataService = new ( function() {
 					cnNameData = dataC;
 				
 					_self.combineServentData(skillData, ascensionData, cnNameData);
-				}
-			}
-		}
+				})
+			})
+		})
 	}
 	
 	_self.combineServentData = function (skillData, ascensionData, cnNameData) {
