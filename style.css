@@ -31,3 +31,25 @@ html, body {
 	margin-top: 2px;
 	font-size: 12px;
 }
+
+.servent-img {
+	width: 100px;
+}
+
+.material-content table th, td {
+	width: 11.1%;
+	font-size: 12px;
+	padding: .25rem;
+}
+
+.material-content table td {
+	padding: .15rem;
+}
+
+.ascension-material-table {
+	width: 44.44%; 
+}
+
+.material-icon {
+	width: 40px;
+}
