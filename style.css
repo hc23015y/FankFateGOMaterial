@@ -1,0 +1,33 @@
+.add-servent-icon i {
+	margin-top: 10px;
+}
+
+html, body, card-content {
+	min-width:1200px;
+}
+
+html, body {
+	background-color: #FFFAF0;
+}
+
+.mtype-choose {
+	margin-top: -4px;
+}
+
+.ascension-icon {
+	width: 60px;
+	margin-left: -15px;
+}
+.skill-icon {
+	width: 20px;
+	margin-left: -20px;
+}
+
+.servent-choose {
+	font-size: 12px;
+}
+
+.ascension-select, .skill-select {
+	margin-top: 2px;
+	font-size: 12px;
+}
