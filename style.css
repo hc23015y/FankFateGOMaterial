@@ -1,4 +1,4 @@
-.add-servent-icon i {
+.add-servant-icon i {
 	margin-top: 10px;
 }
 
@@ -18,13 +18,18 @@ html, body {
 	width: 60px;
 	margin-left: -15px;
 }
+
 .skill-icon {
 	width: 20px;
 	margin-left: -20px;
 }
 
-.servent-choose {
-	font-size: 12px;
+.icon-unselect {
+	opacity: 0.25;
+}
+
+.servant-name {
+	font-size: 16px;
 }
 
 .ascension-select, .skill-select {
@@ -32,7 +37,7 @@ html, body {
 	font-size: 12px;
 }
 
-.servent-img {
+.servant-img {
 	width: 100px;
 }
 
@@ -52,4 +57,38 @@ html, body {
 
 .material-icon {
 	width: 40px;
+}
+
+.servant-delete-button {
+	font-size: 10px;
+	padding-top: .25rem;
+	padding-bottom: .25rem;
+}
+
+.servant-img-choose, .servant-group-icon {
+	display: inline-block;
+}
+
+.servant-img-choose img {
+	width: 70px;
+	opacity: 0.25;
+}
+
+.img-select > img {
+	opacity: 1;
+	border: 2px solid #00FF00;
+}
+
+.servant-group-list {
+	padding-left: 8rem;
+	padding-right: 5rem;
+}
+
+.servant-group-icon img {
+	width: 30px;
+	opacity: 0.25;
+}
+
+.group-select > img {
+	opacity: 1;
 }

@@ -1,61 +1,83 @@
 window.dataService = new ( function() {
 	let _self = this;
-	let _serventData = [];
+	let _servantData = [];
 	let _materialData = [];
-	
+	let _classData = [];
 	
 	_self.init = function () {
 		console.log('init dataService');
 		
-		_self.initServentData();
+		_self.initServantData();
 		_self.initMaterialData();
 		
 	} 
 	
-	_self.initServentData = function () {
-		let skillData = [];
-		let ascensionData = [];
-		let cnNameData = [];
+	_self.initServantData = function () {
 		
-		$.getJSON( "data/data-skill.json", function( dataS ) {
-			skillData = dataS;
-			
-			$.getJSON( "data/data-ascension.json", function( dataA ) {
-				ascensionData = dataA;
-				
-				$.getJSON( "data/data-chinese-name.json", function( dataC ) {
-					cnNameData = dataC;
-				
-					_self.combineServentData(skillData, ascensionData, cnNameData);
-				})
-			})
+		$.when(
+			$.getJSON( "data/data-skill.json"), 
+			$.getJSON( "data/data-ascension.json"), 
+			$.getJSON( "data/data-chinese-name.json"),
+			$.getJSON( "data/data-class.json")
+		)
+		.done( function (skillResp, ascensionResp, cnNameResp, classResp) {
+			_self.combineServantData(skillResp[0], ascensionResp[0], cnNameResp[0], _self.initClassData(classResp[0]));
+			console.log('load data success');
 		})
+		.fail(function (jqXHR, textStatus, errorThrown) {
+			console.log('load data error');
+		});
+		
 	}
 	
-	_self.combineServentData = function (skillData, ascensionData, cnNameData) {
-		let tempServentData = [];
+	_self.initClassData = function (classData) {
+		let nameMap = {};
+		_classData = classData;
+		
+		$.each(classData, function(index, svClass) {
+			svClass.imgSrc = "images/class_" + svClass.id + ".png";
+			nameMap[svClass.name] = svClass;
+		})
+		
+		return nameMap;
+	}
+	
+	_self.getClassList = function() {
+		return _classData;
+	}
+	
+	_self.combineServantData = function (skillData, ascensionData, cnNameData, classMap) {
+		let tempServantData = [];
 
-		$.each( skillData, function(index , servent) {
-			servent.svtCnName = cnNameData[ index ].name;
+		$.each( skillData, function(index , servant) {
+			servant.svtCnName = cnNameData[ index ].name;
 			
-			if( ascensionData["svt_" + servent.id] != null ) {
-				servent.rare = ascensionData["svt_" + servent.id].rare;
-				servent.cls = ascensionData["svt_" + servent.id].cls;
-				servent.ascension = ascensionData["svt_" + servent.id].ascension;
-				servent.imgSrc = "images/svtNo_" + servent.id + ".png"; 
+			if( ascensionData["svt_" + servant.id] != null ) {
+				servant.rare = ascensionData["svt_" + servant.id].rare;
+				servant.cls = classMap[ascensionData["svt_" + servant.id].cls].enName;
+				servant.ascension = ascensionData["svt_" + servant.id].ascension;
+				servant.imgSrc = "images/svtNo_" + servant.id + ".png"; 
 			}
 			else {
-				servent.rare = "B";
-				servent.cls = "None";
-				servent.ascension = [];
-				servent.imgSrc = "images/btn_close.png";				
+				servant.rare = "B";
+				servant.cls = "None";
+				servant.ascension = [];
+				servant.imgSrc = "images/btn_close.png";				
 			}
 			
-			tempServentData[tempServentData.length] = servent;
+			tempServantData[tempServantData.length] = servant;
 		} )
 		
-		_serventData = tempServentData;
-		console.log(_serventData);
+		_servantData = tempServantData;
+		console.log(_servantData);
+	}
+	
+	_self.getServantData = function( index ) {
+		return _servantData[index];
+	}
+	
+	_self.getServantList = function() {
+		return _servantData;
 	}
 	
 	_self.initMaterialData = function () {

@@ -18,21 +18,18 @@
 		<h1> Fank Fate Go Material </h1>
 		<div class="row">
 			<div class="col-8">
-				<div class="row">
-					<div class='col-sm-4 col-md-3 col-lg-3 col-xl-2'><h3>Servents</h3></div>
-					<div class='col-sm-2 col-md-2 col-lg-2 col-xl-2 add-servent-icon'><i class="fas fa-user-plus"></i></div>
+				<div class="row main-title">
+					<div class='col-sm-4 col-md-3 col-lg-3 col-xl-2'><h3>servants</h3></div>
+					<div class='col-sm-2 col-md-2 col-lg-2 col-xl-2 add-servant-icon'>
+						<i class="fas fa-user-plus" data-toggle="modal" data-target="#servantListModal"></i>
+					</div>
 				</div>
-				<div class="card">
+				<div class="card servant-card">
 					<div class="card-body row">
-						<div class=" col-5 dropdown">
-						  <button class="btn btn-secondary dropdown-toggle servent-choose" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							No999. 魁札爾・科亞特爾〔森巴／聖誕〕
-						  </button>
-						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<a class="dropdown-item" href="#">Something else here</a>
-						  </div>
+						<div class=" col-5 dropdown servant-name">
+							No.999 
+							<br/>
+							魁札爾・科亞特爾〔森巴／聖誕〕  
 						</div>
 						<div class='col-7 row mtype-choose'>
 							<div class="col-6">
@@ -47,13 +44,16 @@
 								<option value="4">4</option>
 							  </select>
 							</div>
-							<div class='col-6'>
+							<div class='col-3'>
 								<div class="form-check">
-								  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+								  <input class="form-check-input hide-material-check" type="checkbox" value="" id="defaultCheck1">
 								  <label class="form-check-label" for="defaultCheck1">
 									Hide
 								  </label>
 								</div>
+							</div>
+							<div class='col-3'>
+								  <button class="btn btn-secondary servant-delete-button">Delete</button>
 							</div>
 							<div class="col-4 form-check">
 							  <img class="rounded skill-icon" src="images/btn_dig_1.png">
@@ -110,10 +110,10 @@
 							  </select>
 							</div>
 						</div>
-						<div class='col-2'>
-							<img class="servent-img" src="images/svtNo_1.png">
+						<div class='col-2 hide-area'>
+							<img class="servant-img" src="images/svtNo_1.png">
 						</div>
-						<div class='col-10 material-content'>
+						<div class='col-10 material-content hide-area'>
 							<table class='table table-bordered text-center skill-material-table'>
 								<thead class='thead-light'>
 									<tr>
@@ -132,7 +132,7 @@
 									<tr>
 										<td>
 											<img class='material-icon' src='images/S_QP.png'>
-											<div>5,000k<div>
+											<div>5,000k</div>
 										</td>
 										<td></td>
 										<td></td>
@@ -171,13 +171,40 @@
 			<div class="col-4">
 				<h3>Total Materials</h3>
 			</div>
-		<div>
-		
+		</div>
 	</div>
+
+	<div class="modal fade" id="servantListModal" tabindex="-1" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<div class='servant-group-list'>
+				<div class='servant-group-icon'>
+					<img src="images/class_0.png">
+				</div>
+			</div>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			<div class='servant-img-choose'>
+				<img src="images/svtNo_1.png" aria-labelledby='imgLabel'>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary add-servants-btn">Add</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="ServantCardClass.js"></script>
 	<script src="dataService.js"></script>
 	<script src="mainComponent.js"></script>
   </body>

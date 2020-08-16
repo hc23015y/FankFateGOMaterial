@@ -1,0 +1,72 @@
+[
+		{
+			"id": 0,
+			"name": "全",
+			"enName": "All"
+		},
+		{
+			"id": 1,
+			"name": "剣",
+			"enName": "Saber"
+		},
+		{
+			"id": 3,
+			"name": "弓",
+			"enName": "Archer"
+		},
+		{
+			"id": 2,
+			"name": "槍",
+			"enName": "Lancer"
+		},
+		{
+			"id": 4,
+			"name": "騎",
+			"enName": "Rider"
+		},
+		{
+			"id": 5,
+			"name": "術",
+			"enName": "Caster"
+		},
+		{
+			"id": 6,
+			"name": "殺",
+			"enName": "Assassion"
+		},
+		{
+			"id": 7,
+			"name": "狂",
+			"enName": "Berserker"
+		},
+		{
+			"id": 8,
+			"name": "盾",
+			"enName": "Shielder"
+		},
+		{
+			"id": 9,
+			"name": "裁",
+			"enName": "Ruler"
+		},
+		{
+			"id": 10,
+			"name": "讐",
+			"enName": "Avenger"
+		},
+		{
+			"id": 11,
+			"name": "分",
+			"enName": "Alter Ego"
+		},
+		{
+			"id": 12,
+			"name": "月",
+			"enName": "Moon Cancer"
+		},
+		{
+			"id": 13,
+			"name": "降",
+			"enName": "Foreigner"
+		}
+]
