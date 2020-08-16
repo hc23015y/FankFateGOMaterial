@@ -55,7 +55,7 @@ window.dataService = new ( function() {
 			if( ascensionData["svt_" + servant.id] != null ) {
 				servant.rare = ascensionData["svt_" + servant.id].rare;
 				servant.cls = classMap[ascensionData["svt_" + servant.id].cls].enName;
-				servant.ascension = ascensionData["svt_" + servant.id].ascension;
+				servant.ascension = _self.ascensionObjectToArray( ascensionData["svt_" + servant.id].ascension );
 				servant.imgSrc = "images/svtNo_" + servant.id + ".png"; 
 			}
 			else {
@@ -70,6 +70,25 @@ window.dataService = new ( function() {
 		
 		_servantData = tempServantData;
 		console.log(_servantData);
+	}
+	
+	_self.ascensionObjectToArray = function(ascensionArr) {
+		let tempArr = [];
+		
+		$.each(ascensionArr, function(index, ascension) {
+			let tempSingleArr = []
+			
+			$.each(ascension, function(key, value) {
+				tempSingleArr[tempSingleArr.length] = {
+					"name" : key,
+					"cnt" : value
+				}
+			})
+			
+			tempArr[index] = tempSingleArr;
+		})
+		
+		return tempArr;
 	}
 	
 	_self.getServantData = function( index ) {

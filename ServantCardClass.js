@@ -2,12 +2,26 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 	let _self = this;
 	let $skillTable;
 	let $ascensionTable;
-	let calculateSw = {
-		"ascension" : false,
-		"skill-1" : false,
-		"skill-2" : false,
-		"skill-3" : false,
-	}
+	let materialStorage = {
+		"ascension" : {
+			"sw" : false,
+			"mArr" : []
+		},
+		"skill" :[
+			{
+				"sw" : false,
+				"mArr" : []				
+			},
+			{
+				"sw" : false,
+				"mArr" : []				
+			},
+			{
+				"sw" : false,
+				"mArr" : []				
+			}
+		]	
+	};
 	
 	_self.init = function() {
 //		console.log(serialNumber);
@@ -23,14 +37,17 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 		
 		$interface.find('.mtype-choose img').addClass("icon-unselect");
 		$interface.find('.skill-icon').each( function (index, icon) { 
-			$(icon).attr('skillNo', 'skill-' + (index + 1) ) 
+			$(icon).attr('skillIndex', index ); 
 		});
 		
 		$skillTable = $interface.find('.skill-material-table');
 		$skillTable.hide();
+		$skillTable.find('tbody').empty();
 		
 		$ascensionTable = $interface.find('.ascension-material-table');
 		$ascensionTable.hide();
+		$ascensionTable.find('tbody').empty();
+		
 	}
 	
 	_self.setEvent = function() {
@@ -48,41 +65,82 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 		})
 		
 		$interface.find('.ascension-icon').click( function (){
-			if(calculateSw.ascension) {
+			if(materialStorage.ascension.sw) {
 				$interface.find('.ascension-icon').addClass("icon-unselect");
-				calculateSw.ascension = false;
+				materialStorage.ascension.sw = false;
 			}
 			else {
 				$interface.find('.ascension-icon').removeClass("icon-unselect");
-				calculateSw.ascension = true;
+				materialStorage.ascension.sw = true;
 			}
 			
-			_self.resetAscensionTable();
+			_self.displayAscensionTable();
 		});
 		
 		$interface.find('.skill-icon').click( function (){
 			let $skillIcon = $(this);
-			
-			if(calculateSw[$skillIcon.attr('skillNo')]) {
+			let skillIndex = $skillIcon.attr('skillIndex');
+		
+			if(materialStorage.skill[skillIndex].sw) {
 				$skillIcon.addClass("icon-unselect");
-				calculateSw[$skillIcon.attr('skillNo')] = false;
+				materialStorage.skill[skillIndex].sw = false;
 			}
 			else {
 				$skillIcon.removeClass("icon-unselect");
-				calculateSw[$skillIcon.attr('skillNo')] = true;
+				materialStorage.skill[skillIndex].sw = true;
 			}
 			
-			_self.resetSkillTable();
+			_self.displaySkillTable(skillIndex);
 		});
 	}
 	
-	_self.resetAscensionTable = function() {
-		if(calculateSw.ascension) {
+	_self.displayAscensionTable = function() {	
+		$ascensionTable.find('tbody').empty();
+	
+		if(materialStorage.ascension.sw) {
+			let startAscension = $interface.find(".ascension-select.start-lv").val();
+			let endAscension = $interface.find(".ascension-select.end-lv").val();
+			let maxRow = 1;
+				
+			// display data and storage data
+			for(let trNo = 0; trNo < maxRow; trNo++) {
+				$tr = $(document.createElement("tr"));
+				$ascensionTable.find('tbody').append( $tr );
+				
+				$.each(servantData.ascension, function(index, ascension){
+					let $td = $(document.createElement("td"));
+					let lv = index + 1;
+					
+					$tr.append($td);	
+					
+					if(startAscension <= lv && endAscension >= lv && ascension.length > trNo) {
+						let singleAscension = ascension[trNo];
+						let material = window.dataService.getMaterialData(singleAscension.name);
+							
+						$td.html(`<img class='material-icon' src='${material.imgSrc}'><div>${singleAscension.cnt}</div>`);
+					}
+					
+					maxRow = (ascension.length > maxRow) ? ascension.length : maxRow;
+				});
+			}
+			
 			$ascensionTable.show();
 		}
 		else {
 			$ascensionTable.hide();
+			
+			materialStorage.ascension.mArr = [];
 		}
+	}
+	
+	_self.displaySkillTable = function(toggleSkillIndex) {
+		let displayCheck = false;
+		
+		$.each(materialStorage.skill, function(index, skill) {
+			if(skill.sw) displayCheck = true;
+		})
+		
+		$skillTable[(displayCheck) ? "show" : "hide"]();
 	}
 	
 	_self.getInterface = function() {
