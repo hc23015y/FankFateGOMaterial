@@ -5,20 +5,20 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 	let materialStorage = {
 		"ascension" : {
 			"sw" : false,
-			"mArr" : []
+			"totalMaterial" : {}
 		},
 		"skill" :[
 			{
 				"sw" : false,
-				"mArr" : []				
+				"totalMaterial" : {}				
 			},
 			{
 				"sw" : false,
-				"mArr" : []				
+				"totalMaterial" : {}				
 			},
 			{
 				"sw" : false,
-				"mArr" : []				
+				"totalMaterial" : {}				
 			}
 		]	
 	};
@@ -29,6 +29,8 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 		$interface.insertAfter('.main-title');
 		_self.initInterface();
 		_self.setEvent();
+		
+		$interface.show();
 	}
 	
 	_self.initInterface = function() {
@@ -75,6 +77,7 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 			}
 			
 			_self.displayAscensionTable();
+			window.mainComponent.recalculateTotalMaterial();
 		});
 		
 		$interface.find('.skill-icon').click( function (){
@@ -91,11 +94,14 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 			}
 			
 			_self.displaySkillTable(skillIndex);
+			window.mainComponent.recalculateTotalMaterial();
 		});
 	}
 	
 	_self.displayAscensionTable = function() {	
-		$ascensionTable.find('tbody').empty();
+		$ascensionTable.find('tbody').empty();					
+		materialStorage.ascension.totalMaterial = {};
+		$ascensionTable.hide();
 	
 		if(materialStorage.ascension.sw) {
 			let startAscension = $interface.find(".ascension-select.start-lv").val();
@@ -118,6 +124,14 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 						let material = window.dataService.getMaterialData(singleAscension.name);
 							
 						$td.html(`<img class='material-icon' src='${material.imgSrc}'><div>${singleAscension.cnt}</div>`);
+						
+						// add to totalMaterial
+						if(materialStorage.ascension.totalMaterial[singleAscension.name] == null ) {
+							materialStorage.ascension.totalMaterial[singleAscension.name] = singleAscension.cnt;
+						}
+						else {
+							materialStorage.ascension.totalMaterial[singleAscension.name] += singleAscension.cnt;
+						}
 					}
 					
 					maxRow = (ascension.length > maxRow) ? ascension.length : maxRow;
@@ -125,11 +139,6 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 			}
 			
 			$ascensionTable.show();
-		}
-		else {
-			$ascensionTable.hide();
-			
-			materialStorage.ascension.mArr = [];
 		}
 	}
 	
@@ -141,6 +150,10 @@ var ServantCardClass = function ($interface, serialNumber, servantData) {
 		})
 		
 		$skillTable[(displayCheck) ? "show" : "hide"]();
+	}
+	
+	_self.getMaterialStorage = function() {
+		return materialStorage;
 	}
 	
 	_self.getInterface = function() {

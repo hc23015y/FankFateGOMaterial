@@ -92,3 +92,8 @@ html, body {
 .group-select > img {
 	opacity: 1;
 }
+.total-material-block {
+	background-color: white;
+	border: 1px solid rgba(0,0,0,.125);
+	border-radius: .25rem;
+}

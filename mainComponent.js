@@ -98,6 +98,43 @@ window.mainComponent = new ( function() {
 			servantMap[servantCardUuid].getInterface().remove();
 			delete servantMap[servantCardUuid];
 		}
+		
+		_self.recalculateTotalMaterial();
+	}
+	
+	_self.recalculateTotalMaterial = function() {
+		let tempTotalData = {};
+		
+		$.each(servantMap, function(key, servantCard) {
+			let servantTotal = servantCard.getMaterialStorage();
+			
+			// ascension
+			$.each(servantTotal.ascension.totalMaterial, function(mName, mCount) {
+				if(tempTotalData[mName] == null ) {
+					tempTotalData[mName] = mCount;
+				}
+				else {
+					tempTotalData[mName] += mCount;
+				}
+			})
+			
+			//skill
+			
+		});
+		
+		// display total
+		$('.total-material').empty();
+		
+		$.each(tempTotalData, function(mName, mCount) {
+			let colBlocks = (mName == 'QP') ? 12 : 2;
+			
+			let $mDiv = $( "<div class='col-" + colBlocks + " total-material-block'></div>" )
+			let material = window.dataService.getMaterialData(mName);
+			
+			$mDiv.html(`<img class='material-icon' src='${material.imgSrc}'><div>${mCount}</div>`);
+			
+			$('.total-material').append($mDiv);
+		})
 	}
 	
 	
